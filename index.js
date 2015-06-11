@@ -1,12 +1,3 @@
-var seed = null
-if(window.location.hash) {
-    seed = window.location.hash.substr(1)
-} else {
-    seed = Math.floor(Math.random() * 99999)
-    location.hash = seed
-}
-Math.seedrandom(seed)
-
 var Jokes = {}
 for(var id in recdev.labels) {
     var label = recdev.labels[id]
@@ -37,7 +28,7 @@ for(var season in Jokes) {
     }
 }
 
-function getJokesFromSeason(season, amount) {
+function getRandomJokesFromSeason(season, amount) {
     var jokes = []
     season = season || 1
     amount = amount || 25
@@ -45,7 +36,7 @@ function getJokesFromSeason(season, amount) {
         if(index == Math.floor(amount / 2)) {
             jokes.push({
                 "id": "joke-0",
-                "label": "\"This is Arrested Development\""
+                "label": "<b>\"This is Arrested Development\"</b>"
             })
         } else {
             var joke = Jokes[season].shift()
@@ -56,16 +47,30 @@ function getJokesFromSeason(season, amount) {
     return jokes
 }
 
-$(document).ready(function() {
-    function populateBingoBoard() {
-        var jokes = getJokesFromSeason(1, 25)
-        for(var index = 0; index < jokes.length; index++) {
-            $("#" + (index + 1)).find("a").html(jokes[index].label)
-            $("#" + (index + 1)).find("a").attr("href", "http://recurringdevelopments.com/#" + jokes[index].id)
-        }
+function randomizeSeed() {
+    if(window.location.hash) {
+        var seed = window.location.hash.substr(1)
+        Math.seedrandom(seed)
+    } else {
+        var seed = Math.floor(Math.random() * 99999)
+        location.hash = seed
+        Math.seedrandom(seed)
     }
+}
+
+function populateBingoBoard() {
+    var jokes = getRandomJokesFromSeason(1, 25)
+    for(var index = 0; index < jokes.length; index++) {
+        $("#" + (index + 1)).find("a").html(jokes[index].label)
+        $("#" + (index + 1)).find("a").attr("href", "http://recurringdevelopments.com/#" + jokes[index].id)
+    }
+}
+
+$(document).ready(function() {
     $("button").click(function() {
         populateBingoBoard()
     })
-    populateBingoBoard()
+    $("body").ready(function() {
+        populateBingoBoard()
+    })
 })
