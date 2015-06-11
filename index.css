@@ -2,23 +2,69 @@
 {
     margin: 0;
     padding: 0;
+    
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 
 body
+{
+    font-family: cambria;
+}
+
+section
 {
     margin: 2em;
 }
 
 table
 {
+    margin: auto;
 }
 
-td
+table   td
 {
-    width: 100px;
-    height: 100px;
-    border: 1px solid #111;
+    width: 130px;
+    height: 130px;
+    padding: 0.5em;
+    
+    font-size: 0.8em;
+    text-align: center;
+    
+    border-width: 1px;
+    border-color: #111;
+    border-style: solid;
+}
+
+table   td   a
+{
+    color: inherit;
+    text-decoration: none;
+}
+
+button
+{
+    width: 6em;
+    margin: auto;
+    display: block;
+    padding: 0.25em;
+    
+    font: inherit;
+}
+
+small
+{
+    margin: auto;
+    display: block;
+    max-width: 30em;
     
     text-align: center;
-    vertical-align: middle;
+    font-style: italic;
+}
+
+@media print {
+    .do-not-print {
+        display: none;
+    }
 }
