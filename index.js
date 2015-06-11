@@ -59,7 +59,8 @@ function randomizeSeed() {
 }
 
 function populateBingoBoard() {
-    var jokes = getRandomJokesFromSeason(1, 25)
+    var season = $("select").val()
+    var jokes = getRandomJokesFromSeason(season, 25)
     for(var index = 0; index < jokes.length; index++) {
         $("#" + (index + 1)).find("a").html(jokes[index].label)
         $("#" + (index + 1)).find("a").attr("href", "http://recurringdevelopments.com/#" + jokes[index].id)

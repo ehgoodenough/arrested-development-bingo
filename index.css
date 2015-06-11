@@ -52,12 +52,9 @@ table   td   a
     text-decoration: none;
 }
 
-button
+select, button
 {
-    width: 6em;
-    margin: auto;
-    display: block;
-    padding: 0.25em;
+    padding: 0.25em 0.5em;
     
     font: inherit;
 }
