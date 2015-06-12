@@ -1,4 +1,7 @@
-var Jokes = {}
+var Jokes = {
+    "1": [], "2": [],
+    "3": [], "4": []
+}
 for(var id in recdev.labels) {
     var label = recdev.labels[id]
     var flows = recdev.flows[id].flows
@@ -8,27 +11,24 @@ for(var id in recdev.labels) {
             "label": label,
             "flows": flows
         }
-        for(var episode in flows) {
+        for(var episode in joke.flows) {
            var season = parseInt(episode.match(/S([0-9]+)/)[1])
-           if(Jokes[season] == undefined) {
-               Jokes[season] = new Array()
-           }
            if(Jokes[season].indexOf(joke) == -1) {
                Jokes[season].push(joke)
            }
         }
     }
 }
-for(var season in Jokes) {
-    for(var i = Jokes[season].length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1))
-        var swap_variable = Jokes[season][i]
-        Jokes[season][i] = Jokes[season][j]
-        Jokes[season][j] = swap_variable
-    }
-}
 
 function getRandomJokesFromSeason(season, amount) {
+    for(var season in Jokes) {
+        for(var i = Jokes[season].length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1))
+            var swap_variable = Jokes[season][i]
+            Jokes[season][i] = Jokes[season][j]
+            Jokes[season][j] = swap_variable
+        }
+    }
     var jokes = []
     season = season || 1
     amount = amount || 25
